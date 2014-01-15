@@ -1,0 +1,27 @@
+{
+  "name": "koa-passport",
+  "author": {
+    "name": "Markus Ast",
+    "email": "npm.m@rkusa.st"
+  },
+  "version": "0.1.0",
+  "description": "Passport middleware for Koa",
+  "keywords": [
+    "koa",
+    "passport",
+    "auth",
+    "authentication"
+  ],
+  "homepage": "https://github.com/rkusa/koa-passport",
+  "dependencies": {
+    "passport": "~0.1.18"
+  },
+  "bugs": "https://github.com/rkusa/koa-passport/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rkusa/koa-passport.git"
+  },
+  "engines": {
+    "node": ">=0.8"
+  }
+}
