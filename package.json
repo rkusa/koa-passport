@@ -22,6 +22,6 @@
     "url": "git://github.com/rkusa/koa-passport.git"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.11.2"
   }
 }

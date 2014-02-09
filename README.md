@@ -5,9 +5,10 @@
 ## Example
 
 ```js
-// Body Parser
+// Body Parser & Query
 app.use(function*(next) {
   this.req.body = yield /* insert your body parser here */
+  this.req.query = this.query // when using OAuth based passport strategies
 
   yield next
 })
@@ -21,6 +22,8 @@ var passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
 ```
+
+[Example Application](https://github.com/rkusa/koa-passport-example)
 
 ## MIT License
 
