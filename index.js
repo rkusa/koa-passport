@@ -6,8 +6,7 @@ var passport = module.exports = require('passport');
 /**
  * Passport main methods.
  */
-var latest = !!passport.Authenticator
-  , session = passport.session.bind(passport)
+var session = passport.session.bind(passport)
   , initialize = passport.initialize.bind(passport)
   , authenticate = passport.authenticate.bind(passport);
 
@@ -78,18 +77,11 @@ passport.authenticate = function(strategy, options) {
       failure: failure
     });
   }
-
-  var args = [strategy, options, callback];
-
-  // in passport 0.2.x authenticate accepts
-  // passport object as first parameter, we need
-  // to make sure we push it as first argument.
-  if (latest) args.unshift(this);
   
   // the middleware itself
   var middleware = this._framework && this._framework.authenticate
-    ? this._framework.authenticate.apply(this, args)
-    : authenticate.apply(this, args);
+    ? this._framework.authenticate(this, strategy, options, callback)
+    : authenticate(this, strategy, options, callback);
 
   // the wrapped midleware
   function auth(done) {
@@ -113,20 +105,8 @@ passport.authenticate = function(strategy, options) {
   // shortcut for transforming auth information.
   function transformAuthInfo(info) {
     return function(done) {
-      var args = [info];
-
-      // in passport 0.2.x transformAuthInfo accepts
-      // the req object as second parameter, we need
-      // to make sure we only pass this value for this
-      // this version.
-      if (latest) args.push(this.req);
-
-      // we push the callback as last argument.
-      args.push(done);
-
-      // we are good to call the transform method with
-      // out arguments.
-      passport.transformAuthInfo.apply(passport, args);
+      // we are good to call the transform method.
+      passport.transformAuthInfo(info, this.req, done);
     }
   }
 
