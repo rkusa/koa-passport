@@ -1,6 +1,22 @@
-var passport = module.exports = require('passport')
+/**
+ * Module dependencies.
+ */
+var passport = module.exports = require('passport');
 
-var initialize = passport.initialize.bind(passport)
+/**
+ * Passport main methods.
+ */
+var session = passport.session.bind(passport)
+  , initialize = passport.initialize.bind(passport)
+  , authenticate = passport.authenticate.bind(passport);
+
+/**
+ * Our custom Passport's initialization middleware.
+ * 
+ * @param {Object} options
+ * @return {Function} middleware
+ * @api public
+ */
 passport.initialize = function(options) {
   var middleware = initialize(options)
   return function*(next) {
@@ -10,8 +26,13 @@ passport.initialize = function(options) {
   }
 }
 
-var session = passport.session.bind(passport)
-  , authenticate = passport.authenticate.bind(passport)
+/**
+ * Middleware that will restore login state from a session.
+ *
+ * @param {Object} options
+ * @return {Function} middleware
+ * @api public
+ */
 passport.session = function(options) {
   var middleware = authenticate('session', options)
   return function*(next) {
@@ -43,55 +64,103 @@ passport.session = function(options) {
 // build this middleware on every request.
 
 passport.authenticate = function(strategy, options) {
-  // the custom callback, that is provided to passport's
-  // authenticate method
-  function callback(err, res) {
-    // the `done` property will be set on every middleware call
-    callback.done(err, res)
-  }
 
+  options = options || {};
+
+  // the custom callback, that is provided to passport's
+  // authenticate method.
+  function callback(err, user, info, failure) {
+    // the `done` property will be set on every middleware call.
+    callback.done(err,  {
+      user: user,
+      info: info,
+      failure: failure
+    });
+  }
+  
   // the middleware itself
   var middleware = this._framework && this._framework.authenticate
-    ? this._framework.authenticate(strategy, options, callback).bind(this)
-    : authenticate(strategy, options, callback).bind(this)
+    ? this._framework.authenticate(this, strategy, options, callback)
+    : authenticate(this, strategy, options, callback);
 
   // the wrapped midleware
-  function auth(req, res, done) {
+  function auth(done) {
     // Set the `done` property of the custom callback.
     // The method, set to this property, will be called
     // once the callback itself gets called.
-    callback.done = done
-    middleware.call(middleware, req, res, done)
+    callback.done = done;
+    middleware.call(middleware, this.req, this.res, done);
+  }
+
+  // short cut for loginin the user.
+  function logIn(user) {
+    return function(done) {
+      // we call req logIn method to add
+      // user to the session and make passport
+      // do its thing.
+      this.req.logIn(user, options, done)
+    }
+  }
+
+  // shortcut for transforming auth information.
+  function transformAuthInfo(info) {
+    return function(done) {
+      // we are good to call the transform method.
+      passport.transformAuthInfo(info, this.req, done);
+    }
   }
 
   // the Koa middleware
   return function*(next) {
-    var res = yield auth.bind(auth, this.req, this.res)
+    
     // res is the result, the custom callback for the passport
-    // authenticate methods receives
+    // authenticate methods receives.
+    var res = yield auth;
+
+    // if no result then nothing to do here.
+    if (!res) return yield next;
+
+    var req = this.req
+      , user = res.user
+      , info = res.info;
 
     // login failed
-    if (res === false) {
+    if (user === false) {
       if (options.failureRedirect) {
         return this.redirect(options.failureRedirect)
       } else {
-        this.status = 401
+        this.status = 401;
       }
     }
-    // login succeeded
+
+    // login succeeded.
     else {
-      yield this.req.logIn.bind(this.req, res, options)
-      if (options.successReturnToOrRedirect) {
-        var url = options.successReturnToOrRedirect
-        if (this.session && this.session.returnTo) {
-          url = this.session.returnTo
-          delete this.session.returnTo
-        }
-        return this.redirect(url)
-      } else if (options.successRedirect) {
-        return this.redirect(options.successRedirect)
+      
+      // we need to call login to actually login the user.
+      yield logIn(user);
+
+      // make sure we assign to the correct user session property.
+      if (options.assignProperty) {
+        req[options.assignProperty] = user;
       } else {
-        yield next
+
+        // transform authentication information.
+        if (options.authInfo !== false) {
+          req.authInfo = yield transformAuthInfo(info);
+        }
+
+        if (options.successReturnToOrRedirect) {
+          var url = options.successReturnToOrRedirect;
+          if (this.session && this.session.returnTo) {
+            url = this.session.returnTo;
+            delete this.session.returnTo;
+          }
+          this.redirect(url);
+        } else if (options.successRedirect) {
+          this.redirect(options.successRedirect);
+        } else {
+          yield next;
+        }
       }
     }
   }

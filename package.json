@@ -14,7 +14,7 @@
   ],
   "homepage": "https://github.com/rkusa/koa-passport",
   "dependencies": {
-    "passport": "~0.1.18"
+    "passport": ">=0.2.x"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
   "repository": {
