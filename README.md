@@ -1,4 +1,6 @@
-# koa-passport
+# koa-passport 
+[![NPM](https://badge.fury.io/js/koa-passport.png)](https://npmjs.org/package/koa-passport)
+[![Dependency Status](https://david-dm.org/rkusa/koa-passport.png?theme=shields.io)](https://david-dm.org/rkusa/koa-passport)
 
 [Passport](https://github.com/jaredhanson/passport) middleware for Koa
 
@@ -8,7 +10,6 @@
 // Body Parser & Query
 app.use(function*(next) {
   this.req.body = yield /* insert your body parser here */
-  this.req.query = this.query // when using OAuth based passport strategies
 
   yield next
 })

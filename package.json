@@ -4,7 +4,7 @@
     "name": "Markus Ast",
     "email": "npm.m@rkusa.st"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Passport middleware for Koa",
   "keywords": [
     "koa",
@@ -13,6 +13,7 @@
     "authentication"
   ],
   "homepage": "https://github.com/rkusa/koa-passport",
+  "main": "./lib",
   "dependencies": {
     "passport": ">=0.2.x"
   },
