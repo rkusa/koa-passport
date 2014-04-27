@@ -1,4 +1,4 @@
-# koa-passport 
+# koa-passport
 [![NPM](https://badge.fury.io/js/koa-passport.png)](https://npmjs.org/package/koa-passport)
 [![Dependency Status](https://david-dm.org/rkusa/koa-passport.png?theme=shields.io)](https://david-dm.org/rkusa/koa-passport)
 
@@ -7,12 +7,9 @@
 ## Example
 
 ```js
-// Body Parser & Query
-app.use(function*(next) {
-  this.req.body = yield /* insert your body parser here */
-
-  yield next
-})
+// body parser
+var bodyParser = require('koa-bodyparser')
+app.use(bodyParser())
 
 // Sessions
 var session = require('koa-session')
