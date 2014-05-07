@@ -1,6 +1,6 @@
 # koa-passport
-[![NPM](https://badge.fury.io/js/koa-passport.png)](https://npmjs.org/package/koa-passport)
-[![Dependency Status](https://david-dm.org/rkusa/koa-passport.png?theme=shields.io)](https://david-dm.org/rkusa/koa-passport)
+[![NPM](https://badge.fury.io/js/koa-passport.svg)](https://npmjs.org/package/koa-passport)
+[![Dependency Status](https://david-dm.org/rkusa/koa-passport.svg?theme=shields.io)](https://david-dm.org/rkusa/koa-passport)
 
 [Passport](https://github.com/jaredhanson/passport) middleware for Koa
 
