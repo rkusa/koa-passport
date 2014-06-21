@@ -21,6 +21,27 @@ app.use(passport.initialize())
 app.use(passport.session())
 ```
 
+
+## Function mapping
+
+You can use passport functions on the ctx object directly. The user is available on the request object and not req, because in Koa req is the raw node request object.
+
+```js
+app.use(function *() {
+  var user = this.request.user
+
+  // isAuth
+  if(this.isAuthenticated())
+
+  // login
+  this.login(/*...*/)
+  this.logIn(/*...*/)
+
+  // same thing for logout, isUnauthenticated
+})
+
+```
+
 [Example Application](https://github.com/rkusa/koa-passport-example)
 
 ## MIT License
