@@ -1,10 +1,11 @@
 # koa-passport
-[![NPM](https://badge.fury.io/js/koa-passport.svg)](https://npmjs.org/package/koa-passport)
-[![Dependency Status](https://david-dm.org/rkusa/koa-passport.svg?theme=shields.io)](https://david-dm.org/rkusa/koa-passport)
 
 [Passport](https://github.com/jaredhanson/passport) middleware for Koa
 
-## Example
+[![NPM][npm]](https://npmjs.org/package/koa-passport)
+[![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
+
+## Usage
 
 ```js
 // body parser
@@ -22,6 +23,8 @@ app.use(passport.session())
 ```
 
 [Example Application](https://github.com/rkusa/koa-passport-example)
+
+You have to start your Koa application with `node --harmony app.js` or `node --harmony-generators --harmony-proxies  app.js` (enable both `generators` and `proxies`).
 
 ## MIT License
 
@@ -43,3 +46,6 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+[npm]: https://badge.fury.io/js/koa-passport.svg
+[dependencies]: https://david-dm.org/rkusa/koa-passport.svg?theme=shields.io

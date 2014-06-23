@@ -16,6 +16,7 @@
   "main": "./lib",
   "dependencies": {
     "co": "^3.0.6",
+    "node-proxy-defaults": "^1.0.0",
     "passport": ">=0.2.x"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
