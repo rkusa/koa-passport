@@ -24,7 +24,7 @@ app.use(passport.session())
 
 [Example Application](https://github.com/rkusa/koa-passport-example)
 
-You have to start your Koa application with `node --harmony app.js` or `node --harmony-generators --harmony-proxies  app.js` (enable both `generators` and `proxies`).
+Note: You have to start your Koa application with `node --harmony app.js` or `node --harmony-generators --harmony-proxies  app.js` (enable both `generators` and `proxies`).
 
 ## MIT License
 
@@ -47,5 +47,5 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[npm]: https://badge.fury.io/js/koa-passport.svg
-[dependencies]: https://david-dm.org/rkusa/koa-passport.svg?theme=shields.io
+[npm]: http://img.shields.io/npm/v/koa-passport.svg?style=flat
+[dependencies]: http://img.shields.io/gemnasium/rkusa/koa-passport.svg?style=flat
