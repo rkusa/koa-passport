@@ -1,0 +1,7 @@
+/test
+.DS_Store
+.eslintrc
+.travis.yml
+.coveralls.yml
+*.sublime-project
+*.sublime-workspace
