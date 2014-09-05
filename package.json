@@ -16,8 +16,7 @@
   "main": "./lib",
   "dependencies": {
     "co": "^3.1.0",
-    "node-proxy-defaults": "^1.0.0",
-    "passport": ">=0.2.x"
+    "passport": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^1.9.1",

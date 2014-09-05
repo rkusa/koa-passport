@@ -17,6 +17,7 @@ gulp.task('test', function() {
 })
 
 gulp.task('coverage', ['coveralls'], function() {
+  // TODO: coverage for code containing generators seems to be buggy
   process.exit(0)
 })
 
