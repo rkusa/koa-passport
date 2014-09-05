@@ -25,8 +25,6 @@ app.use(passport.session())
 
 [Example Application](https://github.com/rkusa/koa-passport-example)
 
-Note: You have to start your Koa application with `node --harmony app.js` or `node --harmony-generators --harmony-proxies  app.js` (enable both `generators` and `proxies`).
-
 ## MIT License
 
 Copyright (c) 2014 Markus Ast
