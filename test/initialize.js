@@ -1,6 +1,6 @@
 var expect   = require('chai').expect
 var passport = require('../')
-require('co-mocha')
+var co       = require('co')
 
 describe('initialize middleware', function() {
   it('it should return a generator function', function() {
@@ -8,15 +8,15 @@ describe('initialize middleware', function() {
     expect(initialize.constructor.name).to.equal('GeneratorFunction')
   })
 
-  it('it should add itself', function*() {
+  it('it should add itself', co(function*() {
     var initialize = passport.initialize()
     var context = createContext()
     yield initialize.call(context, function*() {
       expect(context.passport).to.have.property('_passport')
     })
-  })
+  }))
 
-  it('should define `req.user`', function*() {
+  it('should define `req.user`', co(function*() {
     var initialize = passport.initialize()
     var context = createContext()
     yield initialize.call(context, function*() {
@@ -25,9 +25,9 @@ describe('initialize middleware', function() {
       context.passport.user = {}
       expect(context.req.user).to.equal(context.passport.user)
     })
-  })
+  }))
 
-  it('should add helper aliases', function*() {
+  it('should add helper aliases', co(function*() {
     var initialize = passport.initialize()
     var context = createContext()
     var methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
@@ -37,15 +37,17 @@ describe('initialize middleware', function() {
         expect(context[name]).to.exist
       })
     })
-  })
+  }))
 })
 
 var IncomingMessage = require('http').IncomingMessage
 function createContext() {
   var context = {
     req: new IncomingMessage,
-    request: {}
+    request: {
+    }
   }
+  context.request.ctx = context
 
   return context
 }

@@ -84,17 +84,17 @@ describe('authenticate middleware', function() {
     } catch(e) {}
   })
 
-  it('should let unauthorized requests pass through', function*() {
+  it('should let unauthorized requests pass through', co(function*() {
     yield client
       .get('/')
       .expect(204)
       .end()
 
     expect(context.req.user).to.be.undefined
-  })
+  }))
 
   describe('login using the middleware', function() {
-    it('should refuse wrong credentials', function*() {
+    it('should refuse wrong credentials', co(function*() {
       yield client
         .post('/login')
         .send({ username: 'test', password: 'asdf' })
@@ -107,9 +107,9 @@ describe('authenticate middleware', function() {
       expect(context.isAuthenticated()).to.be.false
       expect(context.isUnauthenticated()).to.be.true
       expect()
-    })
+    }))
 
-    it('should accept valid credentials', function*() {
+    it('should accept valid credentials', co(function*() {
       yield client
         .post('/login')
         .send({ username: 'test', password: 'test' })
@@ -123,11 +123,11 @@ describe('authenticate middleware', function() {
       expect(session).to.eql({
         passport: { user: 1 }
       })
-    })
+    }))
   })
 
   describe('login using `.login()` method', function() {
-    it('should work', function*() {
+    it('should work', co(function*() {
       yield client
         .get('/')
         .expect(204)
@@ -139,18 +139,18 @@ describe('authenticate middleware', function() {
       })
       expect(context.isAuthenticated()).to.be.true
       expect(context.isUnauthenticated()).to.be.false
-    })
+    }))
   })
 
   describe('logout', function() {
-    it('should work', function*() {
+    it('should work', co(function*() {
       yield context.login(user)
       context.logout()
 
       expect(session).to.eql({ passport: {} })
       expect(context.isAuthenticated()).to.be.false
       expect(context.isUnauthenticated()).to.be.true
-    })
+    }))
   })
 
   describe('custom callback', function() {
@@ -164,7 +164,7 @@ describe('authenticate middleware', function() {
       })
     })
 
-    it('should refuse wrong credentials', function*() {
+    it('should refuse wrong credentials', co(function*() {
       yield client
         .post('/custom')
         .send({ username: 'test', password: 'asdf' })
@@ -175,9 +175,9 @@ describe('authenticate middleware', function() {
       expect(context.isAuthenticated()).to.be.false
       expect(context.isUnauthenticated()).to.be.true
       expect()
-    })
+    }))
 
-    it('should accept valid credentials', function*() {
+    it('should accept valid credentials', co(function*() {
       yield client
         .post('/custom')
         .send({ username: 'test', password: 'test' })
@@ -189,6 +189,6 @@ describe('authenticate middleware', function() {
       expect(session).to.eql({
         passport: { user: 1 }
       })
-    })
+    }))
   })
 })

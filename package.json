@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "chai": "^1.9.1",
-    "co-mocha": "^1.0.1",
     "co-supertest": "0.0.7",
     "gulp": "^3.8.7",
     "gulp-coveralls": "^0.1.2",

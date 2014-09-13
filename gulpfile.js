@@ -4,9 +4,7 @@
 
 var gulp = require('gulp')
 
-gulp.task('default', ['test'], function() {
-  process.exit(0)
-})
+gulp.task('default', ['test'])
 
 var mocha = require('gulp-mocha')
 gulp.task('test', function() {
