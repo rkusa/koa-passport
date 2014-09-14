@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0
+
+Make the `req` mock to inherit from Koa's `request` object before adding delegates for Node's request and Koa's context to it. This makes custom properties/methods added to Koa's request available to passport and its authentication strategies.
+
+## 1.0.1
+
+- add `flash` to the `req` mock
+
 ## 1.0.0
 
 Using ES6 Proxy currently breaks debugging (see #17). Until this is fixed, the Proxy approach got replace by delegating a whitelist of possible used properties/methods to either Node's request, Koa's context or Koa's request.
