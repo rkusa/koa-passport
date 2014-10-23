@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.2
+
+- redirect `req.app.get('trust proxy')` to Koa's `app.proxy` (#22)
+
+## 1.1.1
+
+- add `authInfo` to request mock
+
 ## 1.1.0
 
 Make the `req` mock to inherit from Koa's `request` object before adding delegates for Node's request and Koa's context to it. This makes custom properties/methods added to Koa's request available to passport and its authentication strategies.
