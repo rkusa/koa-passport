@@ -1,4 +1,4 @@
-image: drone/node:0.11
+image: node:0.11
 script:
   - npm install --silent
   - npm test
