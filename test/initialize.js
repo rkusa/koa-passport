@@ -8,7 +8,7 @@ describe('initialize middleware', function() {
     expect(initialize.constructor.name).to.equal('GeneratorFunction')
   })
 
-  it('it should add itself', co(function*() {
+  it('it should add itself', co.wrap(function*() {
     var initialize = passport.initialize()
     var context = createContext()
     yield initialize.call(context, function*() {
@@ -16,7 +16,7 @@ describe('initialize middleware', function() {
     })
   }))
 
-  it('should define `req.user`', co(function*() {
+  it('should define `req.user`', co.wrap(function*() {
     var initialize = passport.initialize()
     var context = createContext()
     yield initialize.call(context, function*() {
@@ -27,7 +27,7 @@ describe('initialize middleware', function() {
     })
   }))
 
-  it('should add helper aliases', co(function*() {
+  it('should add helper aliases', co.wrap(function*() {
     var initialize = passport.initialize()
     var context = createContext()
     var methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']

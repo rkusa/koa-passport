@@ -84,7 +84,7 @@ describe('authenticate middleware', function() {
     } catch(e) {}
   })
 
-  it('should let unauthorized requests pass through', co(function*() {
+  it('should let unauthorized requests pass through', co.wrap(function*() {
     yield client
       .get('/')
       .expect(204)
@@ -94,7 +94,7 @@ describe('authenticate middleware', function() {
   }))
 
   describe('login using the middleware', function() {
-    it('should refuse wrong credentials', co(function*() {
+    it('should refuse wrong credentials', co.wrap(function*() {
       yield client
         .post('/login')
         .send({ username: 'test', password: 'asdf' })
@@ -109,7 +109,7 @@ describe('authenticate middleware', function() {
       expect()
     }))
 
-    it('should accept valid credentials', co(function*() {
+    it('should accept valid credentials', co.wrap(function*() {
       yield client
         .post('/login')
         .send({ username: 'test', password: 'test' })
@@ -127,7 +127,7 @@ describe('authenticate middleware', function() {
   })
 
   describe('login using `.login()` method', function() {
-    it('should work', co(function*() {
+    it('should work', co.wrap(function*() {
       yield client
         .get('/')
         .expect(204)
@@ -143,7 +143,7 @@ describe('authenticate middleware', function() {
   })
 
   describe('logout', function() {
-    it('should work', co(function*() {
+    it('should work', co.wrap(function*() {
       yield context.login(user)
       context.logout()
 
@@ -157,14 +157,14 @@ describe('authenticate middleware', function() {
     it('should throw when providing a non-generator function', function(done) {
       co(function*() {
         yield* passport.authenticate('local', function() {}).call(context)
-      })(function(err) {
+      }).catch(function(err) {
         expect(err).to.exist
         expect(err.message).to.equal('Your custom authentication callback must be a Generator Function')
         done()
       })
     })
 
-    it('should refuse wrong credentials', co(function*() {
+    it('should refuse wrong credentials', co.wrap(function*() {
       yield client
         .post('/custom')
         .send({ username: 'test', password: 'asdf' })
@@ -177,7 +177,7 @@ describe('authenticate middleware', function() {
       expect()
     }))
 
-    it('should accept valid credentials', co(function*() {
+    it('should accept valid credentials', co.wrap(function*() {
       yield client
         .post('/custom')
         .send({ username: 'test', password: 'test' })
