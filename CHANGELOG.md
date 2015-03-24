@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.5
+
+- fix to not throw if `req.user` is already defined
+- upgrade dependencies
+
+## 1.1.4
+
+- add `status` argument to authentication callback
+
+## 1.1.3
+
+- make internal `req` mock less error-prone
+
 ## 1.1.2
 
 - redirect `req.app.get('trust proxy')` to Koa's `app.proxy` (#22)
