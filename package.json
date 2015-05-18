@@ -16,19 +16,19 @@
   "main": "./lib",
   "dependencies": {
     "co": "^4.4.0",
-    "passport": "^0.2.0"
+    "passport": "^0.2.1"
   },
   "devDependencies": {
     "chai": "^2.1",
-    "co-supertest": "0.0.8",
+    "co-supertest": "0.0.10",
     "gulp": "^3.8",
     "gulp-mocha": "^2.0",
-    "koa": "^0.18",
-    "koa-bodyparser": "^1.0",
+    "koa": "^0.20",
+    "koa-bodyparser": "^2.0",
     "koa-route": "^2.1",
     "mocha": "^2.2",
     "passport-local": "^1.0",
-    "supertest": "^0.15"
+    "supertest": "^1.0"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
   "repository": {
