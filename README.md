@@ -16,7 +16,7 @@ app.use(bodyParser())
 // Sessions
 var session = require('koa-session')
 app.keys = ['secret']
-app.use(session())
+app.use(session(app))
 
 var passport = require('koa-passport')
 app.use(passport.initialize())
