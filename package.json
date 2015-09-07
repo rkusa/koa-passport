@@ -4,7 +4,7 @@
     "name": "Markus Ast",
     "email": "npm.m@rkusa.st"
   },
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "Passport middleware for Koa",
   "keywords": [
     "koa",
@@ -16,14 +16,14 @@
   "main": "./lib",
   "dependencies": {
     "co": "^4.4.0",
-    "passport": "^0.2.1"
+    "passport": "^0.3.0"
   },
   "devDependencies": {
-    "chai": "^2.1",
+    "chai": "^3.2",
     "co-supertest": "0.0.10",
     "gulp": "^3.8",
     "gulp-mocha": "^2.0",
-    "koa": "^0.20",
+    "koa": "^1.0",
     "koa-bodyparser": "^2.0",
     "koa-route": "^2.1",
     "mocha": "^2.2",

@@ -103,7 +103,7 @@ describe('authenticate middleware', function() {
 
       var redirectTo = context.response.get('Location')
       expect(redirectTo).to.equal('/failed')
-      expect(session).to.eql({ passport: {} })
+      expect(session).to.eql({})
       expect(context.isAuthenticated()).to.be.false
       expect(context.isUnauthenticated()).to.be.true
       expect()
@@ -171,7 +171,7 @@ describe('authenticate middleware', function() {
         .expect(401, '{"success":false}')
         .end()
 
-      expect(session).to.eql({ passport: {} })
+      expect(session).to.eql({})
       expect(context.isAuthenticated()).to.be.false
       expect(context.isUnauthenticated()).to.be.true
       expect()
