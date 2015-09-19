@@ -1,7 +1,14 @@
-image: node:0.11
-script:
-  - npm install --silent
-  - npm test
+build:
+  image: node:$$NODE_VERSION
+  commands:
+    - npm install --silent
+    - npm test
+
+matrix:
+  NODE_VERSION:
+    - 4
+    - 0.12
+
 notify:
   email:
     recipients:

@@ -4,7 +4,7 @@
 
 [![NPM][npm]](https://npmjs.org/package/koa-passport)
 [![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
-[![Build Status][drone]](https://ci.rkusa.st/github.com/rkusa/koa-passport)
+[![Build Status][drone]](https://ci.rkusa.st/rkusa/koa-passport)
 
 ## Usage
 
@@ -48,4 +48,4 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [npm]: http://img.shields.io/npm/v/koa-passport.svg?style=flat-square
 [dependencies]: http://img.shields.io/david/rkusa/koa-passport.svg?style=flat-square
-[drone]: http://ci.rkusa.st/api/badge/github.com/rkusa/koa-passport/status.svg?branch=master&style=flat-square
+[drone]: http://ci.rkusa.st/api/badges/rkusa/koa-passport/status.svg?style=flat-square
