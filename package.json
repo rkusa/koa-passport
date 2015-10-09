@@ -35,7 +35,7 @@
     "url": "git://github.com/rkusa/koa-passport.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --harmony"
   },
   "engines": {
     "node": ">=0.12"
