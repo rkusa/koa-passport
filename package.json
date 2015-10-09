@@ -21,7 +21,7 @@
   "devDependencies": {
     "chai": "^3.2",
     "co-supertest": "0.0.10",
-    "gulp": "^3.8",
+    "gulp": "^3.9.0",
     "gulp-mocha": "^2.0",
     "koa": "^1.0",
     "koa-bodyparser": "^2.0",
