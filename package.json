@@ -27,7 +27,7 @@
     "koa-bodyparser": "^2.0",
     "koa-route": "^2.1",
     "mocha": "^2.2",
-    "passport-local": "^1.0",
+    "passport-local": "^1.0.0",
     "supertest": "^1.0"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
