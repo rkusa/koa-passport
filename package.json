@@ -13,22 +13,21 @@
     "authentication"
   ],
   "homepage": "https://github.com/rkusa/koa-passport",
+  "license": "MIT",
   "main": "./lib",
   "dependencies": {
     "co": "^4.4.0",
     "passport": "^0.3.0"
   },
   "devDependencies": {
-    "chai": "^3.2",
+    "chai": "^3.2.0",
     "co-supertest": "0.0.10",
-    "gulp": "^3.8",
-    "gulp-mocha": "^2.0",
-    "koa": "^1.0",
-    "koa-bodyparser": "^2.0",
-    "koa-route": "^2.1",
-    "mocha": "^2.2",
-    "passport-local": "^1.0",
-    "supertest": "^1.0"
+    "koa": "^1.0.0",
+    "koa-bodyparser": "^2.0.0",
+    "koa-route": "^2.1.0",
+    "mocha": "^2.2.0",
+    "passport-local": "^1.0.0",
+    "supertest": "^1.0.0"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
   "repository": {
@@ -36,10 +35,9 @@
     "url": "git://github.com/rkusa/koa-passport.git"
   },
   "scripts": {
-    "test": "node --harmony `which gulp`",
-    "coveralls": "node --harmony `which gulp` coverage"
+    "test": "mocha"
   },
   "engines": {
-    "node": ">=0.11.2"
+    "node": ">=0.12"
   }
 }
