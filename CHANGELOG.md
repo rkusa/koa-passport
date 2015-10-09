@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- upgrade `passport` to `^0.3.0`
+
 ## 1.1.5
 
 - fix to not throw if `req.user` is already defined
