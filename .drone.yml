@@ -7,9 +7,8 @@ build:
 matrix:
   NODE_VERSION:
     - 4
-    - 0.12
 
 notify:
   email:
     recipients:
-      - m+epoxy@rkusa.st
+      - m+koa@rkusa.st
