@@ -1,9 +1,11 @@
-var supertest = require('supertest-as-promised')
-var expect    = require('chai').expect
+'use strict'
 
-var user = { id: 1, username: 'test' }
+const supertest = require('supertest-as-promised')
+const expect    = require('chai').expect
 
-var passport = require('../')
+const user = { id: 1, username: 'test' }
+
+const passport = require('../')
 
 passport.serializeUser(function(user, done) {
   done(null, user.id)
@@ -13,7 +15,7 @@ passport.deserializeUser(function(id, done) {
   done(null, user)
 })
 
-var LocalStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local').Strategy
 passport.use(new LocalStrategy(function(username, password, done) {
   // retrieve user ...
   if (username === 'test' && password === 'test') {
@@ -24,10 +26,10 @@ passport.use(new LocalStrategy(function(username, password, done) {
 }))
 
 const Koa = require('koa')
-var app = new Koa()
+const app = new Koa()
 app.use(require('koa-bodyparser')())
 
-var session
+let session
 app.use(function(ctx, next) {
   ctx.session = session = {}
   return next()
@@ -36,13 +38,13 @@ app.use(function(ctx, next) {
 app.use(passport.initialize())
 app.use(passport.session())
 
-var context
+let context
 app.use(function(ctx, next) {
   context = ctx
   return next()
 })
 
-var route = require('koa-route')
+const route = require('koa-route')
 app.use(route.get('/', function(ctx) {
   ctx.status = 204
 }))
@@ -67,8 +69,8 @@ app.use(route.post('/custom', function(ctx, next) {
 }))
 
 describe('authenticate middleware', function() {
-  var port = process.env.PORT || 4000
-  var server, client
+  const port = process.env.PORT || 4000
+  let server, client
   before(function(done) {
     server = app.listen(port, done)
     client = supertest(server)
@@ -98,7 +100,7 @@ describe('authenticate middleware', function() {
       .send({ username: 'test', password: 'asdf' })
       .expect(302)
       .then(() => {
-        var redirectTo = context.response.get('Location')
+        const redirectTo = context.response.get('Location')
         expect(redirectTo).to.equal('/failed')
         expect(session).to.eql({})
         expect(context.isAuthenticated()).to.be.false
@@ -113,7 +115,7 @@ describe('authenticate middleware', function() {
       .send({ username: 'test', password: 'test' })
       .expect(302)
       .then(() => {
-        var redirectTo = context.response.get('Location')
+        const redirectTo = context.response.get('Location')
         expect(redirectTo).to.equal('/secured')
         expect(context.isAuthenticated()).to.be.true
         expect(context.isUnauthenticated()).to.be.false

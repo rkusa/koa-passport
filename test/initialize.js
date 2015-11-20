@@ -1,18 +1,20 @@
-var expect   = require('chai').expect
-var passport = require('../')
+'use strict'
+
+const expect   = require('chai').expect
+const passport = require('../')
 
 describe('initialize middleware', function() {
   it('it should add itself', function() {
-    var initialize = passport.initialize()
-    var context = createContext()
+    const initialize = passport.initialize()
+    const context = createContext()
     return initialize(context, function() {
       expect(context.passport).to.have.property('_passport')
     })
   })
 
   it('should define `req.user`', function() {
-    var initialize = passport.initialize()
-    var context = createContext()
+    const initialize = passport.initialize()
+    const context = createContext()
     return initialize(context, function() {
       expect('user' in context.req).to.be.true
 
@@ -22,9 +24,9 @@ describe('initialize middleware', function() {
   })
 
   it('should add helper aliases', function() {
-    var initialize = passport.initialize()
-    var context = createContext()
-    var methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
+    const initialize = passport.initialize()
+    const context = createContext()
+    const methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
     return initialize(context, function() {
       methods.forEach(function(name) {
         expect(context.req[name]).to.exist
@@ -34,9 +36,9 @@ describe('initialize middleware', function() {
   })
 })
 
-var IncomingMessage = require('http').IncomingMessage
+const IncomingMessage = require('http').IncomingMessage
 function createContext() {
-  var context = {
+  const context = {
     req: new IncomingMessage,
     request: {
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- use strict
+
 ## 2.0.0
 
 - use promises rather than generators for `koa@2.x` compatibility
