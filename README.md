@@ -6,19 +6,22 @@
 [![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
 [![Build Status][drone]](https://ci.rkusa.st/rkusa/koa-passport)
 
+**Notice: `koa-passport@2` support `koa@2`, for `koa@1` use `koa-passport@1`.**
+
 ## Usage
 
 ```js
 // body parser
-var bodyParser = require('koa-bodyparser')
+const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
 
 // Sessions
-var session = require('koa-session')
+const convert = require('koa-convert') // necessary until koa-generic-session has been updated to support koa@2
+const session = require('koa-generic-session')
 app.keys = ['secret']
-app.use(session(app))
+app.use(convert(session()))
 
-var passport = require('koa-passport')
+const passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
 ```

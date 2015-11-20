@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0
+
+- use promises rather than generators for `koa@2.x` compatibility
+- use some es6 features
+
 ## 1.2.0
 
 - upgrade `passport` to `^0.3.0`

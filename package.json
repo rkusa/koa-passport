@@ -4,30 +4,30 @@
     "name": "Markus Ast",
     "email": "npm.m@rkusa.st"
   },
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Passport middleware for Koa",
   "keywords": [
     "koa",
     "passport",
     "auth",
-    "authentication"
+    "authentication",
+    "authorization"
   ],
   "homepage": "https://github.com/rkusa/koa-passport",
   "license": "MIT",
   "main": "./lib",
   "dependencies": {
-    "co": "^4.4.0",
     "passport": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "co-supertest": "0.0.10",
-    "koa": "^1.0.0",
-    "koa-bodyparser": "^2.0.0",
-    "koa-route": "^2.1.0",
+    "koa": "^2.0.0-alpha.3",
+    "koa-bodyparser": "^3.0.0",
+    "koa-route": "^3.0.0",
     "mocha": "^2.2.0",
     "passport-local": "^1.0.0",
-    "supertest": "^1.0.0"
+    "supertest": "^1.0.0",
+    "supertest-as-promised": "^2.0.2"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
   "repository": {
@@ -38,6 +38,6 @@
     "test": "mocha --harmony"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">= 4"
   }
 }
