@@ -6,7 +6,7 @@
 [![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
 [![Build Status][drone]](https://ci.rkusa.st/rkusa/koa-passport)
 
-**Notice: `koa-passport@2` support `koa@2`, for `koa@1` use `koa-passport@1`.**
+**Notice: `koa-passport@2` supports `koa@2`, for `koa@1` please use `koa-passport@1`.**
 
 ## Usage
 
