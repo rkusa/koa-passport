@@ -7,8 +7,3 @@ build:
 matrix:
   NODE_VERSION:
     - 4
-
-notify:
-  email:
-    recipients:
-      - m+koa@rkusa.st
