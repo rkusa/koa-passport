@@ -1,3 +1,5 @@
+debug: true
+
 build:
   image: node:$$NODE_VERSION
   commands:
