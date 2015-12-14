@@ -6,6 +6,11 @@
 [![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
 [![Build Status][drone]](https://ci.rkusa.st/rkusa/koa-passport)
 
+koa-passport version  | koa version | branch | npm tag
+--------------------- | ------------| ------ | -------
+1.x                   | 1.x         | master | latest
+2.x                   | 2.x         | v2.x   | next
+
 ## Usage
 
 ```js
