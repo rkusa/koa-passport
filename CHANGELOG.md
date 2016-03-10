@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+- export KoaPassport as an alternative to the by default exported singleton
+
 ## 2.0.1
 
 - use strict
