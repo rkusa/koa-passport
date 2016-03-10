@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+
+- export KoaPassport as an alternative to the by default exported singleton
+
 ## 1.2.0
 
 - upgrade `passport` to `^0.3.0`
