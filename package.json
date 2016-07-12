@@ -17,6 +17,7 @@
   "license": "MIT",
   "main": "./lib",
   "dependencies": {
+    "depd": "^1.1.0",
     "passport": "^0.3.0"
   },
   "devDependencies": {
