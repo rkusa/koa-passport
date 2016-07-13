@@ -90,6 +90,7 @@ describe('authenticate middleware', function() {
     .expect(204)
     .then(() => {
       expect(context.req.user).to.be.undefined
+      expect(context.state.user).to.be.undefined
     })
   })
 
@@ -105,6 +106,7 @@ describe('authenticate middleware', function() {
         expect(session).to.eql({})
         expect(context.isAuthenticated()).to.be.false
         expect(context.isUnauthenticated()).to.be.true
+        expect(context.state.user).to.be.undefined
         expect()
       })
     })
@@ -119,6 +121,7 @@ describe('authenticate middleware', function() {
         expect(redirectTo).to.equal('/secured')
         expect(context.isAuthenticated()).to.be.true
         expect(context.isUnauthenticated()).to.be.false
+        expect(context.state.user).to.eql(user)
         expect(session).to.eql({
           passport: { user: 1 }
         })
@@ -138,6 +141,7 @@ describe('authenticate middleware', function() {
           })
           expect(context.isAuthenticated()).to.be.true
           expect(context.isUnauthenticated()).to.be.false
+          expect(context.state.user).to.eql(user)
         })
       })
     })
@@ -151,6 +155,7 @@ describe('authenticate middleware', function() {
         expect(session).to.eql({ passport: {} })
         expect(context.isAuthenticated()).to.be.false
         expect(context.isUnauthenticated()).to.be.true
+        expect(context.state.user).to.be.undefined
       })
     })
   })
@@ -165,6 +170,7 @@ describe('authenticate middleware', function() {
         expect(session).to.eql({})
         expect(context.isAuthenticated()).to.be.false
         expect(context.isUnauthenticated()).to.be.true
+        expect(context.state.user).to.be.undefined
         expect()
       })
     })
@@ -177,6 +183,7 @@ describe('authenticate middleware', function() {
       .then(() => {
         expect(context.isAuthenticated()).to.be.true
         expect(context.isUnauthenticated()).to.be.false
+        expect(context.state.user).to.eql(user)
         expect(session).to.eql({
           passport: { user: 1 }
         })
