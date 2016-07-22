@@ -31,6 +31,18 @@ app.use(passport.session())
 
 [Example Application](https://github.com/rkusa/koa-passport-example)
 
+Passport's values and methods are exposed as follows:
+
+```js
+app.use(async ctx => {
+  ctx.isAuthenticated()
+  ctx.isUnauthenticated()
+  ctx.login()
+  ctx.logout()
+  ctx.state.user
+})
+```
+
 ## License
 
   [MIT](LICENSE)
