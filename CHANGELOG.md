@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0
+
+- move `user` into `ctx.state`
+- user in `ctx.req.user` is deprecated and will removed eventually
+
 ## 2.1.0
 
 - export KoaPassport as an alternative to the by default exported singleton
