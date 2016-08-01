@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.2
+
+- remove `ctx.req.user` deprecation warning for now #66
+
 ## 2.2.1
 
 - fix middleware to properly catch promise errors #63
