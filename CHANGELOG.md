@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+- fix middleware to properly catch promise errors #63
+
 ## 2.2.0
 
 - move `user` into `ctx.state`

@@ -4,7 +4,7 @@
     "name": "Markus Ast",
     "email": "npm.m@rkusa.st"
   },
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Passport middleware for Koa",
   "keywords": [
     "koa",
@@ -17,7 +17,6 @@
   "license": "MIT",
   "main": "./lib",
   "dependencies": {
-    "depd": "^1.1.0",
     "passport": "^0.3.0"
   },
   "devDependencies": {
