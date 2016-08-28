@@ -4,7 +4,7 @@
 
 [![NPM][npm]](https://npmjs.org/package/koa-passport)
 [![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
-[![Build Status][drone]](https://ci.rkusa.st/rkusa/koa-passport)
+[![Build Status][travis]](https://travis-ci.org/rkusa/koa-passport)
 
 koa-passport version  | koa version | branch | npm tag
 --------------------- | ------------| ------ | -------
@@ -34,6 +34,6 @@ app.use(passport.session())
 
   [MIT](LICENSE)
 
-[npm]: http://img.shields.io/npm/v/koa-passport.svg?style=flat-square
-[dependencies]: http://img.shields.io/david/rkusa/koa-passport.svg?style=flat-square
-[drone]: http://ci.rkusa.st/api/badges/rkusa/koa-passport/status.svg?style=flat-square
+[npm]: http://img.shields.io/npm/v/koa-passport.svg
+[dependencies]: http://img.shields.io/david/rkusa/koa-passport.svg
+[travis]: https://travis-ci.org/rkusa/koa-passport.svg?branch=master
