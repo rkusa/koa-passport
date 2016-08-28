@@ -4,6 +4,7 @@
 
 - remove `ctx.passport` and save state variables (like `_passport` and `user`) in `ctx.state` instead
 - prevent `passport` from monkey patching `http.IncomingMessage`
+- change arguments from custom authentication callbacks from `user, info, status` to `err, user, info, status` (`err` added) to be consistent with passport
 
 ## 2.2.2
 
