@@ -1,5 +1,9 @@
 # Changelog
 
+## upcoming 3.0
+
+- remove `ctx.passport` and save state variables (like `_passport` and `user`) in `ctx.state` instead
+
 ## 2.2.2
 
 - remove `ctx.req.user` deprecation warning for now #66

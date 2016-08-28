@@ -135,7 +135,7 @@ describe('authenticate middleware', function() {
       .get('/')
       .expect(204)
       .then(() => {
-        context.login(user).then(() => {
+        return context.login(user).then(() => {
           expect(session).to.eql({
             passport: { user: 1 }
           })
@@ -149,13 +149,18 @@ describe('authenticate middleware', function() {
 
   describe('logout', function() {
     it('should work', function() {
-      return context.login(user).then(() => {
-        context.logout()
+      return client
+      .get('/')
+      .expect(204)
+      .then(() => {
+        return context.login(user).then(() => {
+          context.logout()
 
-        expect(session).to.eql({ passport: {} })
-        expect(context.isAuthenticated()).to.be.false
-        expect(context.isUnauthenticated()).to.be.true
-        expect(context.state.user).to.be.undefined
+          expect(session).to.eql({ passport: {} })
+          expect(context.isAuthenticated()).to.be.false
+          expect(context.isUnauthenticated()).to.be.true
+          expect(context.state.user).to.be.null
+        })
       })
     })
   })

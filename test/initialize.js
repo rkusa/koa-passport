@@ -8,7 +8,7 @@ describe('initialize middleware', function() {
     const initialize = passport.initialize()
     const context = createContext()
     return initialize(context, function() {
-      expect(context.passport).to.have.property('_passport')
+      expect(context.state).to.have.property('_passport')
     })
   })
 
@@ -18,8 +18,8 @@ describe('initialize middleware', function() {
     return initialize(context, function() {
       expect('user' in context.req).to.be.true
 
-      context.passport.user = {}
-      expect(context.req.user).to.equal(context.passport.user)
+      context.state.user = {}
+      expect(context.req.user).to.equal(context.state.user)
     })
   })
 
@@ -40,8 +40,8 @@ const IncomingMessage = require('http').IncomingMessage
 function createContext() {
   const context = {
     req: new IncomingMessage,
-    request: {
-    }
+    request: {},
+    state: {},
   }
   context.request.ctx = context
 
