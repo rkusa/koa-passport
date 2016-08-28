@@ -3,6 +3,7 @@
 ## upcoming 3.0
 
 - remove `ctx.passport` and save state variables (like `_passport` and `user`) in `ctx.state` instead
+- prevent `passport` from monkey patching `http.IncomingMessage`
 
 ## 2.2.2
 

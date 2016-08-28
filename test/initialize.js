@@ -29,7 +29,7 @@ describe('initialize middleware', function() {
     const methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
     return initialize(context, function() {
       methods.forEach(function(name) {
-        expect(context.req[name]).to.exist
+        expect(context.req[name]).to.not.exist
         expect(context[name]).to.exist
       })
     })
