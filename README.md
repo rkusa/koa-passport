@@ -9,26 +9,45 @@
 koa-passport version  | koa version | branch | npm tag
 --------------------- | ------------| ------ | -------
 1.x                   | 1.x         | master | latest
-2.x                   | 2.x         | v2.x   | next
+2.x, 3.x              | 2.x         | v2.x   | next
+
+## Migration to v`3.0.0-rc.1`
+
+- change `ctx.passport.*` to `ctx.state.*` (e.g. `ctx.passport.user` to `ctx.state.user`)
+- don't call passport methods on `ctx.req` (e.g. use `ctx.login` instead of `ctx.req.login`)
+- update custom authentication callback arguments to `err, user, info, status` (e.g. `passport.authenticate('local', function(err, user, info, status) { ... })(ctx, next)`)
 
 ## Usage
 
 ```js
 // body parser
-var bodyParser = require('koa-bodyparser')
+const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
 
 // Sessions
-var session = require('koa-session')
+const convert = require('koa-convert') // necessary until koa-generic-session has been updated to support koa@2
+const session = require('koa-generic-session')
 app.keys = ['secret']
-app.use(session(app))
+app.use(convert(session()))
 
-var passport = require('koa-passport')
+const passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
 ```
 
 [Example Application](https://github.com/rkusa/koa-passport-example)
+
+Passport's values and methods are exposed as follows:
+
+```js
+app.use(async ctx => {
+  ctx.isAuthenticated()
+  ctx.isUnauthenticated()
+  ctx.login()
+  ctx.logout()
+  ctx.state.user
+})
+```
 
 ## License
 

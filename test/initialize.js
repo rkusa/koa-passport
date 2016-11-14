@@ -1,51 +1,47 @@
-var expect   = require('chai').expect
-var passport = require('../')
-var co       = require('co')
+'use strict'
+
+const expect   = require('chai').expect
+const passport = require('../')
 
 describe('initialize middleware', function() {
-  it('it should return a generator function', function() {
-    var initialize = passport.initialize()
-    expect(initialize.constructor.name).to.equal('GeneratorFunction')
+  it('it should add itself', function() {
+    const initialize = passport.initialize()
+    const context = createContext()
+    return initialize(context, function() {
+      expect(context.state).to.have.property('_passport')
+    })
   })
 
-  it('it should add itself', co.wrap(function*() {
-    var initialize = passport.initialize()
-    var context = createContext()
-    yield initialize.call(context, function*() {
-      expect(context.passport).to.have.property('_passport')
-    })
-  }))
-
-  it('should define `req.user`', co.wrap(function*() {
-    var initialize = passport.initialize()
-    var context = createContext()
-    yield initialize.call(context, function*() {
+  it('should define `req.user`', function() {
+    const initialize = passport.initialize()
+    const context = createContext()
+    return initialize(context, function() {
       expect('user' in context.req).to.be.true
 
-      context.passport.user = {}
-      expect(context.req.user).to.equal(context.passport.user)
+      context.state.user = {}
+      expect(context.req.user).to.equal(context.state.user)
     })
-  }))
+  })
 
-  it('should add helper aliases', co.wrap(function*() {
-    var initialize = passport.initialize()
-    var context = createContext()
-    var methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
-    yield initialize.call(context, function*() {
+  it('should add helper aliases', function() {
+    const initialize = passport.initialize()
+    const context = createContext()
+    const methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
+    return initialize(context, function() {
       methods.forEach(function(name) {
-        expect(context.req[name]).to.exist
+        expect(context.req[name]).to.not.exist
         expect(context[name]).to.exist
       })
     })
-  }))
+  })
 })
 
-var IncomingMessage = require('http').IncomingMessage
+const IncomingMessage = require('http').IncomingMessage
 function createContext() {
-  var context = {
+  const context = {
     req: new IncomingMessage,
-    request: {
-    }
+    request: {},
+    state: {},
   }
   context.request.ctx = context
 

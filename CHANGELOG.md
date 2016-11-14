@@ -1,5 +1,37 @@
 # Changelog
 
+## upcoming 3.0
+
+- remove `ctx.passport` and save state variables (like `_passport` and `user`) in `ctx.state` instead
+- prevent `passport` from monkey patching `http.IncomingMessage`
+- change arguments from custom authentication callbacks from `user, info, status` to `err, user, info, status` (`err` added) to be consistent with passport
+
+## 2.2.2
+
+- remove `ctx.req.user` deprecation warning for now #66
+
+## 2.2.1
+
+- fix middleware to properly catch promise errors #63
+
+## 2.2.0
+
+- move `user` into `ctx.state`
+- user in `ctx.req.user` is deprecated and will removed eventually
+
+## 2.1.0
+
+- export KoaPassport as an alternative to the by default exported singleton
+
+## 2.0.1
+
+- use strict
+
+## 2.0.0
+
+- use promises rather than generators for `koa@2.x` compatibility
+- use some es6 features
+
 ## 1.3.0
 
 - export KoaPassport as an alternative to the by default exported singleton
