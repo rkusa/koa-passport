@@ -8,8 +8,9 @@
 
 koa-passport version  | koa version | branch | npm tag
 --------------------- | ------------| ------ | -------
-1.x                   | 1.x         | master | latest
-2.x, 3.x              | 2.x         | v2.x   | next
+1.x                   | 1.x         | v1.x   | latest
+2.x                   | 2.x         | v2.x   | next
+3.x                   | 2.x         | master |
 
 ## Migration to v`3.0.0-rc.1`
 
