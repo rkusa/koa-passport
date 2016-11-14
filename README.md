@@ -12,7 +12,7 @@ koa-passport version  | koa version | branch | npm tag
 2.x                   | 2.x         | v2.x   | next
 3.x                   | 2.x         | master |
 
-## Migration to v`3.0.0-rc.1`
+## Migration to v`3.0.0-rc.2`
 
 - change `ctx.passport.*` to `ctx.state.*` (e.g. `ctx.passport.user` to `ctx.state.user`)
 - don't call passport methods on `ctx.req` (e.g. use `ctx.login` instead of `ctx.req.login`)
