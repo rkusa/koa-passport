@@ -1,6 +1,6 @@
 'use strict'
 
-const supertest = require('supertest-as-promised')
+const supertest = require('supertest')
 const expect    = require('chai').expect
 
 const user = { id: 1, username: 'test' }
