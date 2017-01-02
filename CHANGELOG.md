@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0
+
+- add support for assignProperty option (#86)
+
 ## 1.3.0
 
 - export KoaPassport as an alternative to the by default exported singleton
