@@ -1,4 +1,4 @@
-var supertest = require('co-supertest')
+var supertest = require('supertest')
 var expect    = require('chai').expect
 var co        = require('co')
 
@@ -88,7 +88,6 @@ describe('authenticate middleware', function() {
     yield client
       .get('/')
       .expect(204)
-      .end()
 
     expect(context.req.user).to.be.undefined
   }))
@@ -99,7 +98,6 @@ describe('authenticate middleware', function() {
         .post('/login')
         .send({ username: 'test', password: 'asdf' })
         .expect(302)
-        .end()
 
       var redirectTo = context.response.get('Location')
       expect(redirectTo).to.equal('/failed')
@@ -114,7 +112,6 @@ describe('authenticate middleware', function() {
         .post('/login')
         .send({ username: 'test', password: 'test' })
         .expect(302)
-        .end()
 
       redirectTo = context.response.get('Location')
       expect(redirectTo).to.equal('/secured')
@@ -131,7 +128,6 @@ describe('authenticate middleware', function() {
       yield client
         .get('/')
         .expect(204)
-        .end()
 
       yield context.login(user)
       expect(session).to.eql({
@@ -169,7 +165,6 @@ describe('authenticate middleware', function() {
         .post('/custom')
         .send({ username: 'test', password: 'asdf' })
         .expect(401, '{"success":false}')
-        .end()
 
       expect(session).to.eql({})
       expect(context.isAuthenticated()).to.be.false
@@ -182,7 +177,6 @@ describe('authenticate middleware', function() {
         .post('/custom')
         .send({ username: 'test', password: 'test' })
         .expect(200, '{"success":true}')
-        .end()
 
       expect(context.isAuthenticated()).to.be.true
       expect(context.isUnauthenticated()).to.be.false
