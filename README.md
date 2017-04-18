@@ -44,7 +44,7 @@ Passport's values and methods are exposed as follows:
 app.use(async ctx => {
   ctx.isAuthenticated()
   ctx.isUnauthenticated()
-  ctx.login()
+  await ctx.login()
   ctx.logout()
   ctx.state.user
 })
