@@ -26,10 +26,9 @@ const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
 
 // Sessions
-const convert = require('koa-convert') // necessary until koa-generic-session has been updated to support koa@2
-const session = require('koa-generic-session')
+const session = require('koa-session')
 app.keys = ['secret']
-app.use(convert(session()))
+app.use(session({}, app))
 
 const passport = require('koa-passport')
 app.use(passport.initialize())
