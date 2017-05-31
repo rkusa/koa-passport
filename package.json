@@ -20,7 +20,7 @@
     "passport": "^0.3.2"
   },
   "devDependencies": {
-    "chai": "^3.5",
+    "chai": "^4.0.1",
     "koa": "^2.0.0-alpha.5",
     "koa-bodyparser": "^4.0.0",
     "koa-route": "^3.2",
