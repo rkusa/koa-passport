@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0
+
+- upgrade `passport` to 0.4
+- add `ctx` getter to `req` #89
+
 ## 3.0.0
 
 - remove `ctx.passport` and save state variables (like `_passport` and `user`) in `ctx.state` instead
