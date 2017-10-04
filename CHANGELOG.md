@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.1
+
+- add `params` to `req` #110
+
 ## 4.0.0
 
 - upgrade `passport` to 0.4
