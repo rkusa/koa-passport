@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0
+
+- add `res` to `req` #114
+- add `send()` method to `req` #114
+
 ## 4.0.1
 
 - add `params` to `req` #110
