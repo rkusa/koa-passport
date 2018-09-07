@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.1
+
+- add `protocol` to the Koa `ctx` delegates #121
+
 ## 4.1.0
 
 - add `res` to `req` #114
