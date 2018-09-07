@@ -10,7 +10,7 @@ koa-passport version  | koa version | branch
 --------------------- | ------------| ------
 1.x                   | 1.x         | v1.x
 2.x                   | 2.x         | v2.x
-3.x                   | 2.x         | master
+4.x                   | 2.x         | master
 
 ## Migration to `v3`
 
