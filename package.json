@@ -20,13 +20,13 @@
     "passport": "^0.4.0"
   },
   "devDependencies": {
-    "chai": "^4.1",
-    "koa": "^2.3.0",
-    "koa-bodyparser": "^4.2.0",
+    "chai": "^4.2.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
     "koa-route": "^3.2",
-    "mocha": "^5.1.1",
+    "mocha": "^5.2.0",
     "passport-local": "^1.0",
-    "supertest": "^3.0"
+    "supertest": "^3.3.0"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
   "repository": {
