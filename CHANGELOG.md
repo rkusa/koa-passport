@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.2
+
+- add `set` to `req` to imporve compatibility with more passport strategies #128
+
 ## 4.1.1
 
 - add `protocol` to the Koa `ctx` delegates #121
