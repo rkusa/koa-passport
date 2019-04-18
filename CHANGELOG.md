@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.1.2
+## 4.1.3
 
 - add `set` to `req` to imporve compatibility with more passport strategies #128
 
