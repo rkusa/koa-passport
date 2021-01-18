@@ -26,7 +26,7 @@
     "koa-route": "^3.2",
     "mocha": "^6.1.4",
     "passport-local": "^1.0",
-    "supertest": "^4.0.2"
+    "supertest": "^6.1.1"
   },
   "bugs": "https://github.com/rkusa/koa-passport/issues",
   "repository": {
