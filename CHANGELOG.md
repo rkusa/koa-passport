@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.4
+
+- add `ip` to the Koa `ctx` delegates #157
+
 ## 4.1.3
 
 - add `set` to `req` to imporve compatibility with more passport strategies #128
