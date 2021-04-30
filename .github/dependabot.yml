@@ -6,12 +6,3 @@ updates:
     interval: daily
     time: "04:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: mocha
-    versions:
-    - 8.2.1
-    - 8.3.0
-    - 8.3.1
-  - dependency-name: supertest
-    versions:
-    - 6.1.3
