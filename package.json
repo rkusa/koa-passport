@@ -24,7 +24,7 @@
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-route": "^3.2",
-    "mocha": "^8.3.1",
+    "mocha": "^9.1.1",
     "passport-local": "^1.0",
     "supertest": "^6.1.3"
   },
