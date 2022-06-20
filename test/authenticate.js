@@ -1,22 +1,22 @@
 'use strict'
 
 const supertest = require('supertest')
-const expect    = require('chai').expect
+const expect = require('chai').expect
 
 const user = { id: 1, username: 'test' }
 
 const passport = require('../')
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id)
 })
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
   done(null, user)
 })
 
 const LocalStrategy = require('passport-local').Strategy
-passport.use(new LocalStrategy(function(username, password, done) {
+passport.use(new LocalStrategy(function (username, password, done) {
   // retrieve user ...
   if (username === 'test' && password === 'test') {
     done(null, user)
@@ -30,7 +30,7 @@ const app = new Koa()
 app.use(require('koa-bodyparser')())
 
 let session
-app.use(function(ctx, next) {
+app.use(function (ctx, next) {
   ctx.session = session = {}
   return next()
 })
@@ -39,13 +39,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 let context
-app.use(function(ctx, next) {
+app.use(function (ctx, next) {
   context = ctx
   return next()
 })
 
 const route = require('koa-route')
-app.use(route.get('/', function(ctx) {
+app.use(route.get('/', function (ctx) {
   ctx.status = 204
 }))
 
@@ -56,8 +56,8 @@ app.use(route.post('/login',
   })
 ))
 
-app.use(route.post('/custom', function(ctx, next) {
-  return passport.authenticate('local', function(err, user, info) {
+app.use(route.post('/custom', function (ctx, next) {
+  return passport.authenticate('local', function (err, user, info) {
     if (user === false) {
       ctx.status = 401
       ctx.body = { success: false }
@@ -68,131 +68,131 @@ app.use(route.post('/custom', function(ctx, next) {
   })(ctx, next)
 }))
 
-describe('authenticate middleware', function() {
+describe('authenticate middleware', function () {
   const port = process.env.PORT || 4000
   let server, client
-  before(function(done) {
+  before(function (done) {
     server = app.listen(port, done)
     client = supertest(server)
   })
-  after(function(done) {
+  after(function (done) {
     server.close(done)
   })
-  process.on('exit', function() {
+  process.on('exit', function () {
     try {
       server.close()
-    } catch(e) {}
+    } catch (e) { }
   })
 
-  it('should let unauthorized requests pass through', function() {
+  it('should let unauthorized requests pass through', function () {
     return client
-    .get('/')
-    .expect(204)
-    .then(() => {
-      expect(context.req.user).to.be.undefined
-      expect(context.state.user).to.be.undefined
-    })
-  })
-
-  describe('login using the middleware', function() {
-    it('should refuse wrong credentials', function() {
-      return client
-      .post('/login')
-      .send({ username: 'test', password: 'asdf' })
-      .expect(302)
-      .then(() => {
-        const redirectTo = context.response.get('Location')
-        expect(redirectTo).to.equal('/failed')
-        expect(session).to.eql({})
-        expect(context.isAuthenticated()).to.be.false
-        expect(context.isUnauthenticated()).to.be.true
-        expect(context.state.user).to.be.undefined
-        expect()
-      })
-    })
-
-    it('should accept valid credentials', function() {
-      return client
-      .post('/login')
-      .send({ username: 'test', password: 'test' })
-      .expect(302)
-      .then(() => {
-        const redirectTo = context.response.get('Location')
-        expect(redirectTo).to.equal('/secured')
-        expect(context.isAuthenticated()).to.be.true
-        expect(context.isUnauthenticated()).to.be.false
-        expect(context.state.user).to.eql(user)
-        expect(session).to.eql({
-          passport: { user: 1 }
-        })
-      })
-    })
-  })
-
-  describe('login using `.login()` method', function() {
-    it('should work', function() {
-      return client
       .get('/')
       .expect(204)
       .then(() => {
-        return context.login(user).then(() => {
-          expect(session).to.eql({
-            passport: { user: 1 }
-          })
+        expect(context.req.user).to.be.undefined
+        expect(context.state.user).to.be.undefined
+      })
+  })
+
+  describe('login using the middleware', function () {
+    it('should refuse wrong credentials', function () {
+      return client
+        .post('/login')
+        .send({ username: 'test', password: 'asdf' })
+        .expect(302)
+        .then(() => {
+          const redirectTo = context.response.get('Location')
+          expect(redirectTo).to.equal('/failed')
+          expect(session).to.eql({})
+          expect(context.isAuthenticated()).to.be.false
+          expect(context.isUnauthenticated()).to.be.true
+          expect(context.state.user).to.be.undefined
+          expect()
+        })
+    })
+
+    it('should accept valid credentials', function () {
+      return client
+        .post('/login')
+        .send({ username: 'test', password: 'test' })
+        .expect(302)
+        .then(() => {
+          const redirectTo = context.response.get('Location')
+          expect(redirectTo).to.equal('/secured')
           expect(context.isAuthenticated()).to.be.true
           expect(context.isUnauthenticated()).to.be.false
           expect(context.state.user).to.eql(user)
+          expect(session).to.eql({
+            passport: { user: 1 }
+          })
         })
-      })
     })
   })
 
-  describe('logout', function() {
-    it('should work', function() {
+  describe('login using `.login()` method', function () {
+    it('should work', function () {
       return client
-      .get('/')
-      .expect(204)
-      .then(() => {
-        return context.login(user).then(() => {
-          context.logout()
+        .get('/')
+        .expect(204)
+        .then(() => {
+          return context.login(user).then(() => {
+            expect(session).to.eql({
+              passport: { user: 1 }
+            })
+            expect(context.isAuthenticated()).to.be.true
+            expect(context.isUnauthenticated()).to.be.false
+            expect(context.state.user).to.eql(user)
+          })
+        })
+    })
+  })
 
-          expect(session).to.eql({ passport: {} })
+  describe('logout', function () {
+    it('should work', function () {
+      return client
+        .get('/')
+        .expect(204)
+        .then(() => {
+          return context.login(user).then(() => {
+            context.logout()
+
+            expect(session).to.eql({ passport: {} })
+            expect(context.isAuthenticated()).to.be.false
+            expect(context.isUnauthenticated()).to.be.true
+            expect(context.state.user).to.be.null
+          })
+        })
+    })
+  })
+
+  describe('custom callback', function () {
+    it('should refuse wrong credentials', function () {
+      return client
+        .post('/custom')
+        .send({ username: 'test', password: 'asdf' })
+        .expect(401, '{"success":false}')
+        .then(() => {
+          expect(session).to.eql({})
           expect(context.isAuthenticated()).to.be.false
           expect(context.isUnauthenticated()).to.be.true
-          expect(context.state.user).to.be.null
+          expect(context.state.user).to.be.undefined
+          expect()
         })
-      })
-    })
-  })
-
-  describe('custom callback', function() {
-    it('should refuse wrong credentials', function() {
-      return client
-      .post('/custom')
-      .send({ username: 'test', password: 'asdf' })
-      .expect(401, '{"success":false}')
-      .then(() => {
-        expect(session).to.eql({})
-        expect(context.isAuthenticated()).to.be.false
-        expect(context.isUnauthenticated()).to.be.true
-        expect(context.state.user).to.be.undefined
-        expect()
-      })
     })
 
-    it('should accept valid credentials', function() {
+    it('should accept valid credentials', function () {
       return client
-      .post('/custom')
-      .send({ username: 'test', password: 'test' })
-      .expect(200, '{"success":true}')
-      .then(() => {
-        expect(context.isAuthenticated()).to.be.true
-        expect(context.isUnauthenticated()).to.be.false
-        expect(context.state.user).to.eql(user)
-        expect(session).to.eql({
-          passport: { user: 1 }
+        .post('/custom')
+        .send({ username: 'test', password: 'test' })
+        .expect(200, '{"success":true}')
+        .then(() => {
+          expect(context.isAuthenticated()).to.be.true
+          expect(context.isUnauthenticated()).to.be.false
+          expect(context.state.user).to.eql(user)
+          expect(session).to.eql({
+            passport: { user: 1 }
+          })
         })
-      })
     })
   })
 })

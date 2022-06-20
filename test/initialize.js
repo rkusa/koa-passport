@@ -1,21 +1,21 @@
 'use strict'
 
-const expect   = require('chai').expect
+const expect = require('chai').expect
 const passport = require('../')
 
-describe('initialize middleware', function() {
-  it('it should add itself', function() {
+describe('initialize middleware', function () {
+  it('it should add itself', function () {
     const initialize = passport.initialize()
     const context = createContext()
-    return initialize(context, function() {
+    return initialize(context, function () {
       expect(context.state).to.have.property('_passport')
     })
   })
 
-  it('should define `req.user`', function() {
+  it('should define `req.user`', function () {
     const initialize = passport.initialize()
     const context = createContext()
-    return initialize(context, function() {
+    return initialize(context, function () {
       expect('user' in context.req).to.be.true
 
       context.state.user = {}
@@ -23,12 +23,12 @@ describe('initialize middleware', function() {
     })
   })
 
-  it('should add helper aliases', function() {
+  it('should add helper aliases', function () {
     const initialize = passport.initialize()
     const context = createContext()
     const methods = ['login', 'logIn', 'logout', 'logOut', 'isAuthenticated', 'isUnauthenticated']
-    return initialize(context, function() {
-      methods.forEach(function(name) {
+    return initialize(context, function () {
+      methods.forEach(function (name) {
         expect(context.req[name]).to.not.exist
         expect(context[name]).to.exist
       })
