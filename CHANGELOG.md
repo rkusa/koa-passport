@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.0
+
+- upgrade `passport` to 0.6
+
 ## 4.1.4
 
 - add `ip` to the Koa `ctx` delegates #157

@@ -6,17 +6,12 @@
 [![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
 [![Build Status][travis]](https://travis-ci.org/rkusa/koa-passport)
 
-koa-passport version  | koa version | branch
---------------------- | ------------| ------
-1.x                   | 1.x         | v1.x
-2.x                   | 2.x         | v2.x
-4.x                   | 2.x         | master
-
-## Migration to `v3`
-
-- change `ctx.passport.*` to `ctx.state.*` (e.g. `ctx.passport.user` to `ctx.state.user`)
-- don't call passport methods on `ctx.req` (e.g. use `ctx.login` instead of `ctx.req.login`)
-- update custom authentication callback arguments to `err, user, info, status` (e.g. `passport.authenticate('local', function(err, user, info, status) { ... })(ctx, next)`)
+koa-passport version  | passport version | koa version | branch
+--------------------- | ---------------- | ------------| ------
+5.x                   | 6.x, 5.x         | 2.x         | main
+4.x                   | 4.x              | 2.x         | v3.x
+3.x, 2.x              | 2.x              | 2.x         | v2.x
+1.x                   | 1.x              | 1.x         | v1.x
 
 ## Usage
 

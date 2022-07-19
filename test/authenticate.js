@@ -1,10 +1,6 @@
-'use strict'
-
-const supertest = require('supertest')
-const expect    = require('chai').expect
-
 const user = { id: 1, username: 'test' }
 
+const supertest = require('supertest')
 const passport = require('../')
 
 passport.serializeUser(function(user, done) {
@@ -29,9 +25,23 @@ const Koa = require('koa')
 const app = new Koa()
 app.use(require('koa-bodyparser')())
 
+
 let session
 app.use(function(ctx, next) {
-  ctx.session = session = {}
+  ctx.session = session = {
+    regenerate(done) {
+      for (const key of Object.keys(session)) {
+        if (key === 'regenerate') {
+          continue
+        }
+        delete session[key]
+      }
+      ctx.session.save = function(done) {
+        process.nextTick(done)
+      }
+      process.nextTick(done)
+    }
+  }
   return next()
 })
 
@@ -71,11 +81,11 @@ app.use(route.post('/custom', function(ctx, next) {
 describe('authenticate middleware', function() {
   const port = process.env.PORT || 4000
   let server, client
-  before(function(done) {
+  beforeAll(function(done) {
     server = app.listen(port, done)
     client = supertest(server)
   })
-  after(function(done) {
+  afterAll(function(done) {
     server.close(done)
   })
   process.on('exit', function() {
@@ -89,8 +99,8 @@ describe('authenticate middleware', function() {
     .get('/')
     .expect(204)
     .then(() => {
-      expect(context.req.user).to.be.undefined
-      expect(context.state.user).to.be.undefined
+      expect(context.req.user).toBeUndefined()
+      expect(context.state.user).toBeUndefined()
     })
   })
 
@@ -102,12 +112,11 @@ describe('authenticate middleware', function() {
       .expect(302)
       .then(() => {
         const redirectTo = context.response.get('Location')
-        expect(redirectTo).to.equal('/failed')
-        expect(session).to.eql({})
-        expect(context.isAuthenticated()).to.be.false
-        expect(context.isUnauthenticated()).to.be.true
-        expect(context.state.user).to.be.undefined
-        expect()
+        expect(redirectTo).toEqual('/failed')
+        expect(session).toEqual({regenerate: expect.any(Function)})
+        expect(context.isAuthenticated()).toBe(false)
+        expect(context.isUnauthenticated()).toBe(true)
+        expect(context.state.user).toBeUndefined()
       })
     })
 
@@ -118,12 +127,14 @@ describe('authenticate middleware', function() {
       .expect(302)
       .then(() => {
         const redirectTo = context.response.get('Location')
-        expect(redirectTo).to.equal('/secured')
-        expect(context.isAuthenticated()).to.be.true
-        expect(context.isUnauthenticated()).to.be.false
-        expect(context.state.user).to.eql(user)
-        expect(session).to.eql({
-          passport: { user: 1 }
+        expect(redirectTo).toEqual('/secured')
+        expect(context.isAuthenticated()).toBe(true)
+        expect(context.isUnauthenticated()).toBe(false)
+        expect(context.state.user).toEqual(user)
+        expect(session).toEqual({
+          passport: { user: 1 },
+          regenerate: expect.any(Function),
+          save: expect.any(Function)
         })
       })
     })
@@ -136,12 +147,14 @@ describe('authenticate middleware', function() {
       .expect(204)
       .then(() => {
         return context.login(user).then(() => {
-          expect(session).to.eql({
-            passport: { user: 1 }
+          expect(session).toEqual({
+            passport: { user: 1 },
+            regenerate: expect.any(Function),
+            save: expect.any(Function)
           })
-          expect(context.isAuthenticated()).to.be.true
-          expect(context.isUnauthenticated()).to.be.false
-          expect(context.state.user).to.eql(user)
+          expect(context.isAuthenticated()).toBe(true)
+          expect(context.isUnauthenticated()).toBe(false)
+          expect(context.state.user).toEqual(user)
         })
       })
     })
@@ -154,12 +167,16 @@ describe('authenticate middleware', function() {
       .expect(204)
       .then(() => {
         return context.login(user).then(() => {
-          context.logout()
+          context.logout(jest.fn())
 
-          expect(session).to.eql({ passport: {} })
-          expect(context.isAuthenticated()).to.be.false
-          expect(context.isUnauthenticated()).to.be.true
-          expect(context.state.user).to.be.null
+          expect(session).toEqual({
+            passport: {},
+            regenerate: expect.any(Function),
+            save: expect.any(Function)
+          })
+          expect(context.isAuthenticated()).toBe(false)
+          expect(context.isUnauthenticated()).toBe(true)
+          expect(context.state.user).toBe(null)
         })
       })
     })
@@ -172,10 +189,10 @@ describe('authenticate middleware', function() {
       .send({ username: 'test', password: 'asdf' })
       .expect(401, '{"success":false}')
       .then(() => {
-        expect(session).to.eql({})
-        expect(context.isAuthenticated()).to.be.false
-        expect(context.isUnauthenticated()).to.be.true
-        expect(context.state.user).to.be.undefined
+        expect(session).toEqual({regenerate: expect.any(Function)})
+        expect(context.isAuthenticated()).toBe(false)
+        expect(context.isUnauthenticated()).toBe(true)
+        expect(context.state.user).toBeUndefined()
         expect()
       })
     })
@@ -186,11 +203,13 @@ describe('authenticate middleware', function() {
       .send({ username: 'test', password: 'test' })
       .expect(200, '{"success":true}')
       .then(() => {
-        expect(context.isAuthenticated()).to.be.true
-        expect(context.isUnauthenticated()).to.be.false
-        expect(context.state.user).to.eql(user)
-        expect(session).to.eql({
-          passport: { user: 1 }
+        expect(context.isAuthenticated()).toBe(true)
+        expect(context.isUnauthenticated()).toBe(false)
+        expect(context.state.user).toEqual(user)
+        expect(session).toEqual({
+          passport: { user: 1 },
+          regenerate: expect.any(Function),
+          save: expect.any(Function)
         })
       })
     })
