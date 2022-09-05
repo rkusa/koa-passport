@@ -3,8 +3,6 @@
 [Passport](https://github.com/jaredhanson/passport) middleware for Koa
 
 [![NPM][npm]](https://npmjs.org/package/koa-passport)
-[![Dependency Status][dependencies]](https://david-dm.org/rkusa/koa-passport)
-[![Build Status][travis]](https://travis-ci.org/rkusa/koa-passport)
 
 koa-passport version  | passport version | koa version | branch
 --------------------- | ---------------- | ------------| ------
