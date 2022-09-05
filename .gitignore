@@ -1,4 +1,5 @@
 .*
 !.gitignore
 !.travis.yml
+!.github
 node_modules
