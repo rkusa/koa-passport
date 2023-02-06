@@ -166,11 +166,12 @@ describe('authenticate middleware', function() {
       .get('/')
       .expect(204)
       .then(() => {
-        return context.login(user).then(() => {
-          context.logout(jest.fn())
+        return context.login(user).then(async () => {
+          const p = context.logout()
+          expect(p).toBeInstanceOf(Promise)
+          await p
 
           expect(session).toEqual({
-            passport: {},
             regenerate: expect.any(Function),
             save: expect.any(Function)
           })
