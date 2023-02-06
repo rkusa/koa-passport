@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.0.0
+
+Potentially breaking change:
+
+- change `logout` signature from `(options, callback) => void` to `(options) => Promise<void>` #188
+
 ## 5.0.0
 
 - upgrade `passport` to 0.6

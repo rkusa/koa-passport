@@ -4,7 +4,7 @@
     "name": "Markus Ast",
     "email": "npm.m@rkusa.st"
   },
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "Passport middleware for Koa",
   "keywords": [
     "koa",

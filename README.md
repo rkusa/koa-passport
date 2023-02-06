@@ -6,7 +6,7 @@
 
 koa-passport version  | passport version | koa version | branch
 --------------------- | ---------------- | ------------| ------
-5.x                   | 6.x, 5.x         | 2.x         | main
+6.x, 5.x              | 6.x, 5.x         | 2.x         | main
 4.x                   | 4.x              | 2.x         | v3.x
 3.x, 2.x              | 2.x              | 2.x         | v2.x
 1.x                   | 1.x              | 1.x         | v1.x
